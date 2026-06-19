@@ -1,26 +1,28 @@
 @import "tailwindcss";
+@import "@heroui/styles"; 
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@theme {
+  /* --- Backgrounds & Base Colors --- */
+  --color-brand-cream: #F9F6F0;       /* Main premium off-white background */
+  --color-brand-white: #FFFFFF;       /* Card background */
+  --color-brand-bg-green: #F0F5EE;    /* Light green section background (e.g., Let's stay in touch) */
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* --- Brand Greens --- */
+  --color-brand-dark: #344631;        /* Deep forest green for main buttons, headers, and dark cards */
+  --color-brand-light: #2E8B57;       /* Fresh vibrant green (e.g., Personalized Nutrition buttons) */
+  --color-brand-lime: #4E9A46;        /* Lime green for text highlights (e.g., "Made Simple") */
+
+  /* --- Text Colors --- */
+  --color-brand-text-main: #111411;   /* Dark heading and primary text color */
+  --color-brand-text-muted: #606461;  /* Subtitles and description body text */
+  --color-brand-text-light: #7C807B;  /* Smaller captions or tertiary text */
+
+  /* --- Accents --- */
+  --color-brand-yellow: #F4B844;      /* Star ratings and golden badges */
+
+  /* --- Fonts --- */
+  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-sans: "Inter", sans-serif;
 }
