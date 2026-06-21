@@ -106,22 +106,26 @@ export default function Navbar() {
 
           {!user ? (
             <>
+            <Link
+              href="/auth/signin"
+            >
+
               <Button
-                as={Link}
-                href="/login"
                 variant="light"
               >
                 <FiLogIn />
                 Login
               </Button>
+            </Link>
 
+<Link href="/auth/signup">
               <Button
-                as={Link}
-                href="/register"
               >
                 <FiUserPlus />
                 Register
               </Button>
+</Link>
+
             </>
           ) : (
             <Dropdown>
@@ -227,22 +231,22 @@ export default function Navbar() {
                   <Drawer.Footer>
                     {!user ? (
                       <div className="flex w-full flex-col gap-3">
-                        <Button
-                          as={Link}
-                          href="/login"
-                          variant="bordered"
-                          className="w-full"
-                        >
-                          Login
-                        </Button>
-
-                        <Button
-                          as={Link}
-                          href="/register"
-                          className="w-full"
-                        >
-                          Register
-                        </Button>
+                        <Link href="/auth/signin">
+                          <Button
+                            variant="bordered"
+                            className="w-full"
+                          >
+                            Login
+                          </Button>
+                        </Link>
+                        <Link href="/auth/signup">
+                          <Button
+                            variant="bordered"
+                            className="w-full"
+                          >
+                            Register
+                          </Button>
+                        </Link>
                       </div>
                     ) : (
                       <div className="flex w-full flex-col gap-3">
