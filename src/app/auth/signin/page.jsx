@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Button, toast } from "@heroui/react";
+import { Button,} from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import {
@@ -15,6 +15,8 @@ import {
   FiCheckCircle,
 } from "react-icons/fi";
 import SocialAuth from "@/component/auth/SocialAuth";
+import { authClient } from "@/lib/auth-client";
+// import alert from "react-hot-alert";
 
 // Social login component (Google/Github etc.)
 // import SocialAuth from "@/Components/Common Sec/SocialAuth";
@@ -53,71 +55,41 @@ export default function SignInPage() {
   };
 
   // ---------------- SIGN IN HANDLER ----------------
-  const handleSignIn = async (e) => {
-    e.preventDefault();
+const handleSignIn = async (e) => {
+  e.preventDefault();
 
-    if (!validateForm()) return;
+  if (!validateForm()) return;
 
-    setIsLoading(true);
+  setIsLoading(true);
 
-    try {
-      /**
-       * =========================================================
-       * 🔥 BETTER-AUTH CONNECTION POINT (YOU WILL CONNECT LATER)
-       * =========================================================
-       *
-       * এখানে তুমি better-auth connect করবে
-       * example:
-       *
-       * const res = await authClient.signIn.email({
-       *    email,
-       *    password,
-       * });
-       *
-       * if (res.error) throw new Error(res.error.message);
-       *
-       * const user = res.data.user;
-       */
-
-      // 🔴 MOCK SUCCESS (REMOVE LATER WHEN CONNECT AUTH)
-      const mockUser = {
+  try {
+    await authClient.signIn.email(
+      {
         email,
-        role: "user", // admin | chef | user (future use)
-      };
+        password,
+      },
+      {
+        onSuccess: () => {
+          console.log("Login Successful");
 
-      // ---------------- SUCCESS TOAST ----------------
-      toast.success({
-        title: "Welcome to CookLy 🍳",
-        description: "Login successful",
-        icon: <FiCheckCircle />,
-      });
+          router.push(redirectTo);
+          router.refresh();
+        },
 
-      /**
-       * =========================================================
-       * 🔥 ROLE BASED REDIRECT (KEEP READY FOR FUTURE)
-       * =========================================================
-       */
-
-      if (mockUser.role === "admin") {
-        router.push("/admin");
-      } else if (mockUser.role === "chef") {
-        router.push("/chef");
-      } else {
-        router.push(redirectTo);
+        onError: (ctx) => {
+          console.error(
+            ctx.error?.message ||
+              "Incorrect email or password."
+          );
+        },
       }
-
-      router.refresh();
-    } catch (error) {
-      toast.error({
-        title: "Login Failed",
-        description: error.message || "Invalid credentials",
-        icon: <FiAlertCircle />,
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+    );
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setIsLoading(false);
+  }
+};
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#fff7ed] via-[#f0fdf4] to-[#ecfeff] px-4">
 

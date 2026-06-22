@@ -14,7 +14,6 @@ Input,
 Label,
 FieldError,
 Button,
-toast,
 } from "@heroui/react";
 
 import {
@@ -85,7 +84,7 @@ const handleSubmit = async (e) => {
       getFormInfo.password !==
       getFormInfo.confirmPassword
     ) {
-      toast({
+      alert({
         title: "Password mismatch",
         description:
           "Password and confirm password must match",
@@ -100,7 +99,7 @@ const handleSubmit = async (e) => {
         getFormInfo.password
       )
     ) {
-      toast({
+      alert({
         title: "Invalid password",
         description:
           "Password must contain one uppercase and one lowercase letter",
@@ -163,7 +162,7 @@ const handleSubmit = async (e) => {
       });
 
     if (error) {
-      toast({
+      alert({
         title: "Signup Failed",
         description:
           error.message,
@@ -175,7 +174,7 @@ const handleSubmit = async (e) => {
 
     router.push("/");
 
-    toast({
+    alert({
       title: "Success",
       description:
         "Account Created Successfully",
@@ -185,7 +184,7 @@ const handleSubmit = async (e) => {
   } catch (error) {
     console.error(error);
 
-    toast({
+    alert({
       title: "Error",
       description:
         "Something went wrong",
