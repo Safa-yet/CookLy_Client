@@ -41,7 +41,7 @@ export default function Navbar() {
   const role = user?.role;
 
   const dashboardRoutes = {
-    user: "/dashboard",
+    user: "/dashboard/user",
     admin: "/dashboard/admin",
   };
 
@@ -67,7 +67,6 @@ export default function Navbar() {
         onSuccess: () => {
           toast.success("Logged Out");
           router.push("/");
-          revalidatePath('/')
         },
         onError: () => setIsLoggingOut(false),
       },

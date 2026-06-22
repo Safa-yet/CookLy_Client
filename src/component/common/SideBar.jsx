@@ -31,11 +31,11 @@ export default function SideBar() {
 
   // ================= ROLE BASED LINKS =================
   const userLinks = [
-    { name: "Dashboard", icon: FiGrid, path: "/dashboard" },
-    { name: "My Recipes", icon: FiBookOpen, path: "/dashboard/my-recipes" },
-    { name: "Add Recipe", icon: FiPlusCircle, path: "/dashboard/add-recipe" },
-    { name: "Favorites", icon: FiHeart, path: "/dashboard/favorites" },
-    { name: "Profile", icon: FiUsers, path: "/dashboard/profile" },
+    { name: "Dashboard", icon: FiGrid, path: "/dashboard/user" },
+    { name: "My Recipes", icon: FiBookOpen, path: "/dashboard/user/my-recipes" },
+    { name: "Add Recipe", icon: FiPlusCircle, path: "/dashboard/user/add-recipe" },
+    { name: "Favorites", icon: FiHeart, path: "/dashboard/user/favorites" },
+    { name: "Profile", icon: FiUsers, path: "/dashboard/user/profile" },
   ];
 
   const adminLinks = [
@@ -59,7 +59,7 @@ export default function SideBar() {
         className="
         hidden lg:flex
         w-72 h-[calc(100vh-80px)]
-        sticky top-0
+        sticky top-20
         flex-col justify-between
         bg-white dark:bg-zinc-950
         border-r border-zinc-200 dark:border-zinc-900
