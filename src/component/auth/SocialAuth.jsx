@@ -1,77 +1,36 @@
-"use client";
+'use client'
+import { authClient } from '@/lib/auth-client';
+import { Button } from '@heroui/react';
+import React from 'react';
+import { FaFacebookF } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 
-import { Button } from "@heroui/react";
-import { FcGoogle } from "react-icons/fc";
-import { motion } from "framer-motion";
+const SocialAuth = () => {
+     const signIn = async () => {
+      const data = await authClient.signIn.social({
+        provider: "google",
+        newUserOptions: {
+          additionalFields: {
+            role: "user",
+            plan: "free",
+          },
+        },
+      });
+    };
 
-export default function SocialAuth() {
-  const handleGoogleLogin = async () => {
-    try {
-      /**
-       * ==================================================
-       * BETTER AUTH GOOGLE SIGN IN
-       * ==================================================
-       *
-       * import { authClient } from "@/lib/auth-client";
-       *
-       * await authClient.signIn.social({
-       *   provider: "google",
-       *   callbackURL: "/",
-       * });
-       *
-       */
+    return (
+         <div className="w-full space-y-2.5">
+            <Button onClick={signIn} className="flex hover:text-white text-black items-center justify-center gap-3 w-full rounded-full border-2 border-outline-variant/30 hover:bg-sec  bg-transparent transition-all duration-300 active:scale-95">
+              <FcGoogle />
+              <span className="font-semibold ">Google</span>
+            </Button>
+            
+            <Button className="flex hover:text-white text-black items-center justify-center gap-3 w-full rounded-full border-2 border-outline-variant/30 hover:bg-sec  bg-transparent transition-all duration-300 active:scale-95">
+              <FaFacebookF />
+              <span className="font-semibold ">Facebook</span>
+            </Button>
+          </div>
+    );
+};
 
-      console.log("Google Login Clicked");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  return (
-    <div className="space-y-5">
-      {/* Divider */}
-      <div className="relative flex items-center">
-        <div className="flex-1 border-t border-default-200"></div>
-
-        <span className="px-4 text-xs font-medium text-default-500 uppercase tracking-wider">
-          Continue with
-        </span>
-
-        <div className="flex-1 border-t border-default-200"></div>
-      </div>
-
-      {/* Google Button */}
-      <motion.div whileTap={{ scale: 0.98 }}>
-        <Button
-          fullWidth
-      
-          size="lg"
-          onPress={handleGoogleLogin}
-          startContent={<FcGoogle size={24} />}
-          className="
-            h-14
-            border-default-200
-            hover:bg-default-50
-            text-default-700
-            font-medium
-            rounded-xl
-          "
-        >
-          Continue with Google
-        </Button>
-      </motion.div>
-
-      {/* Terms */}
-      <p className="text-center text-xs text-default-500 leading-relaxed">
-        By continuing, you agree to our{" "}
-        <span className="font-medium cursor-pointer hover:underline">
-          Terms of Service
-        </span>{" "}
-        and{" "}
-        <span className="font-medium cursor-pointer hover:underline">
-          Privacy Policy
-        </span>
-      </p>
-    </div>
-  );
-}
+export default SocialAuth;
