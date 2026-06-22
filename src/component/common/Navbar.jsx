@@ -14,28 +14,30 @@ import {
   FiChevronDown,
   FiLogIn,
   FiUserPlus,
-  FiCheckCircle,
 } from "react-icons/fi";
 
 import Image from "next/image";
 import LightLogo from "../../img/Logo_White.png";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { Spinner } from "@heroui/react";
 import toast from "react-hot-toast";
+import { ThemeSwitcher } from "../Item/ThemeSwitcher";
+
+// import { ThemeSwitcher } from "../components/theme-switcher";
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
 
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const { data: session, isPending } = authClient.useSession();
-
   const user = session?.user;
+
   const role = user?.role;
 
   const dashboardRoutes = {
@@ -55,13 +57,6 @@ export default function Navbar() {
     });
   }
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleLogout = async () => {
     setIsLoggingOut(true);
     setDropdownOpen(false);
@@ -70,15 +65,8 @@ export default function Navbar() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          toast.success("Logged Out", {
-            description: "You have been successfully signed out.",
-            variant: "flat",
-            color: "success",
-            indicator: <FiCheckCircle />,
-          });
-
+          toast.success("Logged Out");
           router.push("/");
-          router.refresh();
         },
         onError: () => setIsLoggingOut(false),
       },
@@ -86,69 +74,72 @@ export default function Navbar() {
   };
 
   return (
-    <motion.header
-      initial={{ y: -70, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
-        scrolled
-          ? "bg-white dark:bg-zinc-950 shadow-md"
-          : "bg-white/10 dark:bg-black/10 backdrop-blur-xl"
-      }`}
-    >
+    <header className="sticky top-0 left-0 right-0 z-50 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-900">
       <div className="max-w-7xl mx-auto px-5 h-20 flex items-center justify-between">
 
-        {/* ================= LOGO (NO FULL RELOAD ISSUE FIXED) ================= */}
+        {/* LOGO */}
         <Link
           href="/"
+          className="flex items-center"
           onClick={() => {
             setMobileOpen(false);
             setDropdownOpen(false);
           }}
-          className="flex items-center"
         >
-          <Image
-            src={LightLogo}
-            alt="logo"
-            width={160}
-            height={60}
-            priority
-          />
+          <Image src={LightLogo} alt="logo" width={160} height={60} />
         </Link>
 
-        {/* ================= DESKTOP NAV ================= */}
+        {/* DESKTOP NAV */}
         <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-green-500 transition"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navLinks.map((item) => {
+            const isActive = pathname === item.href;
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`relative text-sm font-medium transition group ${
+                  isActive
+                    ? "text-green-500"
+                    : "text-slate-700 dark:text-slate-200"
+                }`}
+              >
+                {item.label}
+
+                {/* UNDERLINE HOVER + ACTIVE */}
+                <span
+                  className={`absolute left-0 -bottom-1 h-[2px] bg-green-500 transition-all duration-300
+                  ${
+                    isActive
+                      ? "w-full"
+                      : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* ================= DESKTOP RIGHT SIDE ================= */}
+        {/* RIGHT SIDE */}
         <div className="hidden lg:flex items-center gap-4">
+
+          {/* ================= THEME SWITCHER (ALWAYS RIGHT) ================= */}
+          <ThemeSwitcher />
 
           {isPending || isLoggingOut ? (
             <Spinner size="sm" color="success" />
           ) : user ? (
             <div className="relative">
 
-              {/* ================= USER BUTTON ================= */}
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-3 px-2 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-900 transition"
+                className="flex items-center gap-3 px-2 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-900"
               >
-
-                {/* AVATAR */}
                 {user.image ? (
                   <img
                     src={user.image}
-                    alt={user.name}
                     className="w-9 h-9 rounded-full object-cover"
+                    alt="user"
                   />
                 ) : (
                   <div className="w-9 h-9 rounded-full bg-green-500 flex items-center justify-center text-white font-bold">
@@ -156,24 +147,16 @@ export default function Navbar() {
                   </div>
                 )}
 
-                {/* NAME + WELCOME */}
                 <div className="text-left hidden md:block">
-                  <p className="text-[11px] text-gray-400 leading-none">
-                    Welcome
-                  </p>
-                  <p className="text-sm font-semibold text-slate-800 dark:text-white">
+                  <p className="text-[11px] text-gray-400">Welcome</p>
+                  <p className="text-sm font-semibold">
                     {user.name}
                   </p>
                 </div>
 
-                <FiChevronDown
-                  className={`transition ${
-                    dropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
+                <FiChevronDown />
               </button>
 
-              {/* ================= DROPDOWN ================= */}
               <AnimatePresence>
                 {dropdownOpen && (
                   <>
@@ -190,7 +173,6 @@ export default function Navbar() {
                     >
                       <Link
                         href="/profile"
-                        onClick={() => setDropdownOpen(false)}
                         className="flex items-center gap-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-zinc-800"
                       >
                         <FiUser />
@@ -211,7 +193,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <Link href="/auth/signin" className="text-sm">
+              <Link href="/auth/signin">
                 <FiLogIn className="inline" /> Login
               </Link>
 
@@ -225,7 +207,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* ================= MOBILE MENU BUTTON ================= */}
+        {/* MOBILE BUTTON */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="lg:hidden"
@@ -234,7 +216,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* ================= MOBILE MENU ================= */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -245,38 +227,28 @@ export default function Navbar() {
           >
             <div className="p-5 flex flex-col gap-4">
 
-              {/* USER INFO MOBILE */}
-              {user && (
-                <div className="flex items-center gap-3 pb-3 border-b">
-                  {user.image ? (
-                    <img
-                      src={user.image}
-                      className="w-10 h-10 rounded-full"
-                      alt="user"
-                    />
-                  ) : (
-                    <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white font-bold">
-                      {user.name?.charAt(0)}
-                    </div>
-                  )}
+              {/* THEME SWITCHER MOBILE */}
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Theme</span>
+                <ThemeSwitcher />
+              </div>
 
-                  <div>
-                    <p className="text-xs text-gray-400">Welcome</p>
-                    <p className="font-semibold">{user.name}</p>
-                  </div>
-                </div>
-              )}
+              {navLinks.map((item) => {
+                const isActive = pathname === item.href;
 
-              {navLinks.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-slate-700 dark:text-slate-200"
-                >
-                  {item.label}
-                </Link>
-              ))}
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`text-sm ${
+                      isActive ? "text-green-500" : "text-slate-700 dark:text-slate-200"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
 
               {user ? (
                 <button
@@ -305,6 +277,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }
