@@ -22,6 +22,7 @@ import {
   FiClock,
   FiBookOpen,
   FiList,
+  FiDollarSign,
 } from "react-icons/fi";
 
 import Image from "next/image";
@@ -101,6 +102,10 @@ export default function AddRecipeForm({ user }) {
         e.currentTarget
       );
 
+      const formValues =
+        Object.fromEntries(
+          formData.entries()
+        );
 
       let uploadedImage = "";
 
@@ -116,7 +121,7 @@ export default function AddRecipeForm({ user }) {
       }
 
       const recipeData = {
-        ...formData,
+        ...formValues,
 
         recipeImage: uploadedImage,
 
@@ -138,7 +143,7 @@ export default function AddRecipeForm({ user }) {
 
         authorEmail: user?.email,
 
-        // createdAt: new Date(),
+        createdAt: new Date(),
 
         updatedAt: new Date(),
       };
@@ -159,7 +164,7 @@ export default function AddRecipeForm({ user }) {
       // Redirect after success
       // =========================
 
-      // router.push("/dashboard/user/my-recipes");
+      router.push("/dashboard/user/my-recipes");
     } catch (error) {
       console.log(error);
 
@@ -237,6 +242,23 @@ export default function AddRecipeForm({ user }) {
                   placeholder="45 Minutes"
                   startContent={
                     <FiClock />
+                  }
+                />
+
+                <FieldError />
+              </TextField>
+              <TextField
+                isRequired
+                name="recipePrice"
+              >
+                <Label>
+                  Recipe Price
+                </Label>
+
+                <Input
+                  placeholder="$10.99"
+                  startContent={
+                    <FiDollarSign />
                   }
                 />
 
