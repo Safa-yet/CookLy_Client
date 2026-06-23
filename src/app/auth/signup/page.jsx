@@ -25,7 +25,7 @@ FiEyeOff,
 FiUpload,
 FiArrowRight,
 } from "react-icons/fi";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -37,6 +37,9 @@ const [preview, setPreview] = useState("");
 const [loading, setLoading] = useState(false);
 
 const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const redirectTo = searchParams.get("redirect") || "/";
 
 const handleImageChange = (e) => {
 const file = e.target.files?.[0];
@@ -505,8 +508,8 @@ min-h-screen
             account?
 
             <Link
-              href="/auth/signin"
-              className="
+                href={`/auth/signin?redirect=${redirectTo}`}
+                className="
               ml-2
 
               font-semibold

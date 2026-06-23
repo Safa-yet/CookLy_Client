@@ -16,6 +16,7 @@ import {
 } from "react-icons/fi";
 import SocialAuth from "@/component/auth/SocialAuth";
 import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
 // import alert from "react-hot-alert";
 
 // Social login component (Google/Github etc.)
@@ -145,12 +146,12 @@ const handleSignIn = async (e) => {
                 Password
               </label>
 
-              <a
+              <Link
                 href="/auth/forgot-password"
                 className="text-xs text-green-600 hover:underline"
               >
                 Forgot password?
-              </a>
+              </Link>
             </div>
 
             <div className={`flex items-center gap-2 px-4 py-3 rounded-xl border-2 transition
@@ -195,12 +196,12 @@ const handleSignIn = async (e) => {
         {/* FOOTER */}
         <p className="text-center text-sm text-gray-500 mt-6">
           Don’t have an account?{" "}
-          <a
+          <Link
             href={`/auth/signup?redirect=${redirectTo}`}
             className="text-green-600 font-medium hover:underline"
           >
             Sign Up
-          </a>
+          </Link>
         </p>
       </motion.div>
     </section>
