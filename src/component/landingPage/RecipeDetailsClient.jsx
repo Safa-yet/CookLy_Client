@@ -15,9 +15,12 @@ import {
 
 import toast from "react-hot-toast";
 import { redirectToLogin } from "@/lib/Reuseable/common";
+import { addFavorite, likeRecipe } from "@/lib/actions/recipe";
 
-export default function RecipeDetailsClient({ recipe, user }) {
+export default function RecipeDetailsClient({ recipe, user ,id}) {
   const router = useRouter();
+
+  const isOwner = user && user.id === recipe.authorId;
 
   const handleLike = async () => {
     try {
@@ -26,9 +29,9 @@ export default function RecipeDetailsClient({ recipe, user }) {
         toast.error("Please Login To Like Recipe");
       }
       // TODO:
-      // await likeRecipe(recipe._id)
+      await likeRecipe(id)
 
-      // toast.success("Recipe Liked ❤️");
+      toast.success("Recipe Liked ❤️");
 
       router.refresh();
     } catch {
@@ -42,10 +45,14 @@ export default function RecipeDetailsClient({ recipe, user }) {
          router.push(`/auth/signin?redirect=/recipes/${recipe._id}`);
         toast.error("Please Login To Favorite Recipe");
       }
-      // TODO:
-      // Login Check
+    const data = {
+      authorId: user.id,
+      authorEmail: user.email,
+      recipeId: recipe._id,
+    };
 
-      // await addFavorite()
+    const result =
+      await addFavorite(data);
 
       toast.success("Added To Favorites ❤️");
     } catch {
@@ -85,8 +92,21 @@ export default function RecipeDetailsClient({ recipe, user }) {
 
   return (
     <section className="max-w-7xl mx-auto px-4 md:px-6 py-10">
+
       {/* Hero */}
 
+
+{isOwner && (
+        <div className="flex justify-end mb-4">
+          <Button
+            variant="flat"
+            color="primary"
+            onClick={() => router.push(`/dashboard/user/recipes/${recipe._id}/edit`)}
+          >
+            Edit Recipe
+          </Button>
+        </div>
+      )}
       <div className="relative rounded-4xl overflow-hidden">
         <div className="relative h-[250px] md:h-[450px]">
           <Image

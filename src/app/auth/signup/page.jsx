@@ -129,7 +129,7 @@ const handleSubmit = async (e) => {
 
       role: "user",
 
-      plan: "free",
+      plan: "user_free",
 
       isBlocked: false,
 

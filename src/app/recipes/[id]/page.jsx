@@ -10,5 +10,5 @@ export default async function RecipeDetailsPage({params}) {
 
   const recipe = await getRecipeDetails(id);
 
-  return <RecipeDetailsClient recipe={recipe} user={user} />;
+  return <RecipeDetailsClient recipe={recipe} user={user} id={id}/>;
 }
