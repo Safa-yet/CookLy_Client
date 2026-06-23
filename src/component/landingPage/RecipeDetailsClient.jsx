@@ -16,6 +16,7 @@ import {
 import toast from "react-hot-toast";
 import { redirectToLogin } from "@/lib/Reuseable/common";
 import { addFavorite, likeRecipe } from "@/lib/actions/recipe";
+import ReportModal from "../Item/ReportModal";
 
 export default function RecipeDetailsClient({ recipe, user ,id}) {
   const router = useRouter();
@@ -60,20 +61,20 @@ export default function RecipeDetailsClient({ recipe, user ,id}) {
     }
   };
 
-  const handleReport = async () => {
-    try {
-        if (!user) {
-         router.push(`/auth/signin?redirect=/recipes/${recipe._id}`);
-        toast.error("Please Login To Report Recipe");
-      }
-      // TODO:
-      // Open HeroUI Modal
+  // const handleReport = async () => {
+  //   try {
+  //       if (!user) {
+  //        router.push(`/auth/signin?redirect=/recipes/${recipe._id}`);
+  //       toast.error("Please Login To Report Recipe");
+  //     }
+  //     // TODO:
+  //     // Open HeroUI Modal
 
-      toast.success("Report Modal Open");
-    } catch {
-      toast.error("Failed");
-    }
-  };
+  //     toast.success("Report Modal Open");
+  //   } catch {
+  //     toast.error("Failed");
+  //   }
+  // };
 
   const handlePurchase = async () => {
     try {
@@ -210,6 +211,15 @@ export default function RecipeDetailsClient({ recipe, user ,id}) {
               </div>
             </div>
 
+{isOwner ? <>
+<div className="flex justify-end mb-4">
+         <h1>THis is not for owners</h1>
+        </div>
+</>
+
+        
+       :
+      <>
             <div className="space-y-3">
               <Button
                 fullWidth
@@ -231,15 +241,7 @@ export default function RecipeDetailsClient({ recipe, user ,id}) {
                 Add To Favorite
               </Button>
 
-              <Button
-                fullWidth
-                color="warning"
-                variant="flat"
-                startContent={<FiFlag />}
-                onPress={handleReport}
-              >
-                Report Recipe
-              </Button>
+             <ReportModal recipe={recipe} user={user} />
 
               <Button
                 fullWidth
@@ -250,6 +252,8 @@ export default function RecipeDetailsClient({ recipe, user ,id}) {
                 Purchase Recipe
               </Button>
             </div>
+      
+      </>}
 
             {/* <Divider className="my-5" /> */}
 

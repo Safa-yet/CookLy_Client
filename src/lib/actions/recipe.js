@@ -18,7 +18,7 @@ export const addFavorite = async (data) => {
 export const addReport = async (data) => {
   return await ServerPost(
     data,
-    "/api/reports"
+    "/api/recipe/reports"
   );
 };
 
