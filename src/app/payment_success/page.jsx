@@ -41,6 +41,6 @@ export default async function Success({ searchParams }) {
     const result = await createRecipeTransaction(subsIndfo)
 
     console.log('Product payment', subsIndfo);
-    return <SuccessContent customerEmail={customerEmail} />;
+    return <SuccessContent subsIndfo={subsIndfo} customerEmail={customerEmail} />;
   }
 }

@@ -67,6 +67,8 @@ export default function Navbar() {
         onSuccess: () => {
           toast.success("Logged Out");
           router.push("/");
+          
+        router.refresh();
         },
         onError: () => setIsLoggingOut(false),
       },

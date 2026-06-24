@@ -14,7 +14,6 @@ import {
 } from "react-icons/fi";
 
 import toast from "react-hot-toast";
-import { redirectToLogin } from "@/lib/Reuseable/common";
 import { addFavorite, likeRecipe } from "@/lib/actions/recipe";
 import ReportModal from "../Item/ReportModal";
 
@@ -67,35 +66,6 @@ export default function RecipeDetailsClient({ recipe, user ,id}) {
     }
   };
 
-  // const handleReport = async () => {
-  //   try {
-  //       if (!user) {
-  //        router.push(`/auth/signin?redirect=/recipes/${recipe._id}`);
-  //       toast.error("Please Login To Report Recipe");
-  //     }
-  //     // TODO:
-  //     // Open HeroUI Modal
-
-  //     toast.success("Report Modal Open");
-  //   } catch {
-  //     toast.error("Failed");
-  //   }
-  // };
-
-  const handlePurchase = async () => {
-    try {
-      if (!user) {
-         router.push(`/auth/signin?redirect=/recipes/${recipe._id}`);
-        toast.error("Please Login To Purchase Recipe");
-      }
-      // TODO:
-      // Stripe Checkout
-
-      toast.success("Redirecting To Checkout");
-    } catch {
-      toast.error("Failed");
-    }
-  };
 
   return (
     <section className="max-w-7xl mx-auto px-4 md:px-6 py-10">

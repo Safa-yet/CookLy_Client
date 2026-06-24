@@ -43,3 +43,9 @@ export const deleteRecipe = async (id) => {
 export const getUserFavoriteRecipe = async (userId) => {
   return await ServerFetch(`/api/recipe/favorites?userId=${userId}`);
 };
+
+// Remove Facorite
+export const removeFavorite = async (id) => {
+  return await ServerPost({}, `/api/recipe/favorites/${id}`, "DELETE");
+};
+

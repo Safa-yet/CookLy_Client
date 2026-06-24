@@ -80,8 +80,7 @@ export default function SideBar() {
               const Icon = item.icon;
 
               const isActive =
-                pathname === item.path ||
-                pathname.startsWith(item.path);
+                pathname === item.path 
 
               return (
                 <Link key={item.name} href={item.path}>

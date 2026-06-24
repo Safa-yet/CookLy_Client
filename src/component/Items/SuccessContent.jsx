@@ -7,7 +7,7 @@ import Link from "next/link";
 import { FiCheckCircle } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-export default function SuccessContent({ customerEmail }) {
+export default function SuccessContent({ customerEmail,subsIndfo }) {
   const router = useRouter();
 
   const [showMessage, setShowMessage] = useState(true);
@@ -185,6 +185,8 @@ export default function SuccessContent({ customerEmail }) {
             <h3 className="text-[#091E21] font-bold text-xl mt-2">
               {customerEmail}
             </h3>
+            <h1>Transaction ID:{subsIndfo.transactionId}</h1>
+            <h1>Amount: ${subsIndfo.recipePrice}</h1>
           </motion.div>
 
           <motion.div
