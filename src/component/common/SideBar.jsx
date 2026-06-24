@@ -20,6 +20,7 @@ import {
 
 import { authClient } from "@/lib/auth-client";
 import MobileSidebar from "./MobileSidebar";
+import { FcInTransit } from "react-icons/fc";
 // import MobileSidebar from "./MobileSidebar";
 
 export default function SideBar() {
@@ -34,6 +35,7 @@ export default function SideBar() {
     { name: "Dashboard", icon: FiGrid, path: "/dashboard/user" },
     { name: "My Recipes", icon: FiBookOpen, path: "/dashboard/user/my-recipes" },
     { name: "Add Recipe", icon: FiPlusCircle, path: "/dashboard/user/add-recipe" },
+    { name: "Purchased Recipe", icon: FcInTransit, path: "/dashboard/user/purchased" },
     { name: "Favorites", icon: FiHeart, path: "/dashboard/user/favorites" },
     { name: "Profile", icon: FiUsers, path: "/dashboard/user/profile" },
   ];

@@ -50,6 +50,12 @@ export default function RecipeDetailsClient({ recipe, user ,id}) {
       authorId: user.id,
       authorEmail: user.email,
       recipeId: recipe._id,
+      recipeName:recipe.recipeName,
+      recipeImage:recipe.recipeImage,
+      likesCount:recipe.likesCount,
+      category:recipe.category,
+      recipePrice:recipe.recipePrice,
+
     };
 
     const result =
