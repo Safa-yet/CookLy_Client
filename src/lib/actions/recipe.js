@@ -38,3 +38,17 @@ export const likeRecipe = async (id) => {
 export const createRecipeTransaction = async(subInfo)=>{
     return ServerPost(subInfo,'/api/recipePayments');
 }
+
+
+// Update Recipe 
+
+
+
+export const UpdateRecipe = async (formData,id) => {
+  return await ServerPost(formData, `/api/recipes/${id}`, "PATCH");
+};
+
+
+export const deleteRecipe = async (id) => {
+  return await ServerPost({}, `/api/recipes/${id}`, "DELETE");
+}

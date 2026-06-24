@@ -10,6 +10,8 @@ import {
   FiEdit2,
   FiTrash2,
 } from "react-icons/fi";
+import EditRecipeModal from "./EditRecipeModal";
+import DeleteRecipeModal from "./DeleteRecipeModal";
 
 export default function MyRecipesTable({
   recipes,
@@ -183,33 +185,10 @@ export default function MyRecipesTable({
                       </Link>
 
                       {/* Edit */}
-                      <Link
-                        href={`/dashboard/my-recipes/edit/${recipe._id}`}
-                      >
-                        <Button
-                          size="sm"
-                          variant="outline"
-                        >
-                          <FiEdit2 />
-                        </Button>
-                      </Link>
+                   <EditRecipeModal recipe={recipe} />
 
                       {/* Delete */}
-                      <Button
-                        size="sm"
-                        color="danger"
-                        variant="flat"
-                        onPress={() => {
-                          // TODO:
-                          // Delete Recipe API Call
-                          console.log(
-                            "Delete Recipe:",
-                            recipe._id
-                          );
-                        }}
-                      >
-                        <FiTrash2 />
-                      </Button>
+                      <DeleteRecipeModal recipe={recipe} />
                     </div>
                   </Table.Cell>
                 </Table.Row>

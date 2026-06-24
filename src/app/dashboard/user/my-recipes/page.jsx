@@ -34,7 +34,7 @@ export default async function MyRecipesPage() {
             </p>
           </div>
 
-          <Link href="/dashboard/my-recipes/add">
+          <Link href="/dashboard/user/add-recipe">
             <Button color="success">
               Add New Recipe
             </Button>
@@ -62,7 +62,7 @@ export default async function MyRecipesPage() {
             with the community.
           </p>
 
-          <Link href="/dashboard/my-recipes/add">
+          <Link href="/dashboard/user/add-recipe">
             <Button
               color="success"
               className="mt-8"
