@@ -1,6 +1,7 @@
 
 import SuccessContent from "@/component/Items/SuccessContent";
-import { createSubsction } from "@/lib/actions/subscriptions";
+import { createRecipeTransaction } from "@/lib/actions/recipe";
+// import { createSubsction } from "@/lib/actions/subscriptions";
 
 import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
@@ -15,7 +16,7 @@ export default async function Success({ searchParams }) {
 
   const {
     status,
-    // payment_intent,
+    payment_intent,
     customer_details: { email: customerEmail },
     metadata,
   } = await stripe.checkout.sessions.retrieve(session_id, {
@@ -28,13 +29,18 @@ export default async function Success({ searchParams }) {
 
   if (status === "complete") {
     const subsIndfo = {
-      email: customerEmail,
-      planId: metadata.planId,
+      UserEmail: customerEmail,
+      recipeId: metadata.recipeId,
+        recipeName: metadata.recipeName,
+        recipePrice: metadata.recipePrice,
+        userId: metadata.userId,
+        transactionId:payment_intent.id,
+        status: payment_intent.status,
     };
 
-    const result = await createSubsction(subsIndfo)
+    const result = await createRecipeTransaction(subsIndfo)
 
-    // console.log('subscription', result);
+    console.log('Product payment', subsIndfo);
     return <SuccessContent customerEmail={customerEmail} />;
   }
 }

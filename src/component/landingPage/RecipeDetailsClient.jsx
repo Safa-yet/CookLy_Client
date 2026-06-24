@@ -242,15 +242,36 @@ export default function RecipeDetailsClient({ recipe, user ,id}) {
               </Button>
 
              <ReportModal recipe={recipe} user={user} />
+ <form
+          action="/api/payment"
+          method="POST"
+        >
+          <input
+            type="hidden"
+            name="recipe_id"
+            value={recipe._id} 
+          />
+          <input
+            type="hidden"
+            name="recipe_name"
+            value={recipe.recipeName} 
+          />
+          <input
+            type="hidden"
+            name="recipe_price"
+            value={recipe.recipePrice} 
+          />
+
 
               <Button
+              type="submit"
                 fullWidth
                 className="bg-[#00B96D] text-white"
                 startContent={<FiShoppingCart />}
-                onPress={handlePurchase}
               >
                 Purchase Recipe
               </Button>
+        </form>
             </div>
       
       </>}

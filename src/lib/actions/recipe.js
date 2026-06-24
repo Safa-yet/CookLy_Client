@@ -32,3 +32,9 @@ export const likeRecipe = async (id) => {
 
   return res.json();
 };
+
+
+
+export const createRecipeTransaction = async(subInfo)=>{
+    return ServerPost(subInfo,'/api/recipePayments');
+}

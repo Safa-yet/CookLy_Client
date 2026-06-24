@@ -249,6 +249,7 @@ export default function AddRecipeForm({ user }) {
               </TextField>
               <TextField
                 isRequired
+                type="number"
                 name="recipePrice"
               >
                 <Label>
