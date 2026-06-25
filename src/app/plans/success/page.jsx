@@ -15,7 +15,7 @@ export default async function Success({ searchParams }) {
 
   const {
     status,
-    // payment_intent,
+    payment_intent,
     customer_details: { email: customerEmail },
     metadata,
   } = await stripe.checkout.sessions.retrieve(session_id, {
@@ -30,6 +30,9 @@ export default async function Success({ searchParams }) {
     const subsIndfo = {
       email: customerEmail,
       planId: metadata.planId,
+      priceId : metadata.priceId,
+       transactionId:payment_intent.id,
+        status: payment_intent.status,
     };
 
     const result = await createSubsction(subsIndfo)

@@ -7,9 +7,8 @@ import { motion } from "framer-motion";
 import {
   FiGrid,
   FiFileText,
-  FiFolder,
   FiUsers,
-  FiLayers,
+
   FiBarChart2,
   FiSettings,
   FiChevronRight,
@@ -20,7 +19,8 @@ import {
 
 import { authClient } from "@/lib/auth-client";
 import MobileSidebar from "./MobileSidebar";
-import { FcInTransit } from "react-icons/fc";
+import { FcInTransit, FcMoneyTransfer } from "react-icons/fc";
+import { MdOutlinePayment } from "react-icons/md";
 // import MobileSidebar from "./MobileSidebar";
 
 export default function SideBar() {
@@ -35,7 +35,7 @@ export default function SideBar() {
     { name: "Dashboard", icon: FiGrid, path: "/dashboard/user" },
     { name: "My Recipes", icon: FiBookOpen, path: "/dashboard/user/my-recipes" },
     { name: "Add Recipe", icon: FiPlusCircle, path: "/dashboard/user/add-recipe" },
-    { name: "Purchased Recipe", icon: FcInTransit, path: "/dashboard/user/purchased" },
+    { name: "Purchased Recipe", icon: FcMoneyTransfer, path: "/dashboard/user/purchased" },
     { name: "Favorites", icon: FiHeart, path: "/dashboard/user/favorites" },
     { name: "Profile", icon: FiUsers, path: "/dashboard/user/profile" },
   ];
@@ -45,7 +45,7 @@ export default function SideBar() {
     { name: "Manage Users", icon: FiUsers, path: "/dashboard/admin/users" },
     { name: "Manage Recipes", icon: FiFileText, path: "/dashboard/admin/recipes" },
     { name: "Reports", icon: FiBarChart2, path: "/dashboard/admin/reports" },
-    { name: "Categories", icon: FiFolder, path: "/dashboard/categories" },
+    { name: "Transitions", icon: FcMoneyTransfer  , path: "/dashboard/admin/transitions" },
     { name: "Settings", icon: FiSettings, path: "/dashboard/settings" },
   ];
 
