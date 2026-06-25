@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { deleteRecipe } from "@/lib/actions/recipe";
+import Image from "next/image";
 
 export default function DeleteRecipeModal({ recipe }) {
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function DeleteRecipeModal({ recipe }) {
 
   return (
     <AlertDialog>
-      <Button size="sm" color="danger" className="bg-red-500 hover:bg-red-600 text-white" variant="flat">
+      <Button title="Delete Recipe" size="sm" color="danger" className="bg-red-500 hover:bg-red-600 text-white" variant="flat">
         <FiTrash2 />
       </Button>
 
@@ -56,6 +57,13 @@ export default function DeleteRecipeModal({ recipe }) {
                 <p>You are about to permanently delete:</p>
 
                 <div className="bg-red-50 border border-red-100 rounded-xl p-4">
+                  <Image
+                    src={recipe.recipeImage}
+                    alt={recipe.recipeName}
+                    width={500}
+                    height={500}
+                    className="w-full w-40 h-40 object-contain rounded-full"
+                  />
                   <h3 className="font-semibold text-red-600">
                     {recipe.recipeName}
                   </h3>

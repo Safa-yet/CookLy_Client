@@ -19,7 +19,7 @@ export default function ReportModal({ recipe, user }) {
 
     const reportData = {
       recipeId: recipe._id,
-      recipeName: recipe.name,
+      recipeName: recipe.recipeName,
       reporterId: user.id,
       reporterEmail: user.email,
       reason,

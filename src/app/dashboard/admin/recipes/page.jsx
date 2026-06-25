@@ -1,11 +1,10 @@
-import React from 'react';
+// dashboard/admin/recipes/page.jsx
 
-const RecipeManage = () => {
-    return (
-        <div>
-            this is manage
-        </div>
-    );
-};
+import ManageRecipesTable from "@/component/Item/ManageRecipesTable";
+import { ServerFetch } from "@/lib/Shared/Server";
 
-export default RecipeManage;
+export default async function Page() {
+  const recipes = await ServerFetch("/api/recipes");
+
+  return <ManageRecipesTable recipes={recipes} />;
+}
