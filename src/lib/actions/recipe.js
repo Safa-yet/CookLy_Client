@@ -17,11 +17,8 @@ export const addReport = async (data) => {
 };
 
 export const likeRecipe = async (id) => {
-  const res = await fetch(`${baseUrl}/api/recipes/${id}`, {
-    method: "PATCH",
-  });
 
-  return res.json();
+  return await ServerPost({}, `/api/recipe/like/${id}`, "PATCH")
 };
 
 export const createRecipeTransaction = async (subInfo) => {
@@ -41,7 +38,7 @@ export const deleteRecipe = async (id) => {
 // Get Favorite Recipe
 
 export const getUserFavoriteRecipe = async (userId) => {
-  return await ServerFetch(`/api/recipe/favorites?userId=${userId}`);
+  return await ServerFetch(`/api/recipe/favorites?authorId=${userId}`);
 };
 
 // Remove Facorite

@@ -28,6 +28,7 @@ FiArrowRight,
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { authClient } from "@/lib/auth-client";
+import SocialAuth from "@/component/auth/SocialAuth";
 
 export default function SignUpPage() {
     const [showPassword, setShowPassword] = useState(false);
@@ -521,8 +522,10 @@ min-h-screen
             </Link>
           </p>
         </div>
+      <SocialAuth></SocialAuth>
       </Fieldset>
     </Form>
+
   </motion.div>
 </section>
 

@@ -174,7 +174,7 @@ export default function Navbar() {
                       className="absolute right-0 mt-2 w-52 bg-white dark:bg-zinc-900 border rounded-xl shadow-lg p-2"
                     >
                       <Link
-                        href="/profile"
+                        href="/dashboard/user/profile"
                         className="flex items-center gap-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-zinc-800"
                       >
                         <FiUser />

@@ -12,7 +12,7 @@ const SocialAuth = () => {
         newUserOptions: {
           additionalFields: {
             role: "user",
-            plan: "free",
+            plan: "user_free",
           },
         },
       });

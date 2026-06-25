@@ -8,7 +8,7 @@ export default async function ManageUsersPage() {
   const totalUsers = users.length;
 
   const premiumUsers = users.filter(
-    (user) => user.plan === "premium"
+    (user) => user.plan === "user_premium"
   ).length;
 
   const blockedUsers = users.filter(

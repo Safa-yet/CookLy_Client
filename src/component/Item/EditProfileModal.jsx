@@ -165,22 +165,24 @@ export default function EditProfileModal({
 
                   <TextField
                     variant="secondary"
+                     name="name"
+                      defaultValue={
+                        user?.name
+                      }
                   >
                     <Label>
                       Full Name
                     </Label>
 
                     <Input
-                      name="name"
-                      defaultValue={
-                        user?.name
-                      }
+                     
                     />
                   </TextField>
 
                   {/* Email */}
 
                   <TextField
+                  isReadOnly
                     variant="secondary"
                   >
                     <Label>
