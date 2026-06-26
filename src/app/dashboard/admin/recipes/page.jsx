@@ -1,10 +1,24 @@
-// dashboard/admin/recipes/page.jsx
-
 import ManageRecipesTable from "@/component/Item/ManageRecipesTable";
 import { ServerFetch } from "@/lib/Shared/Server";
 
-export default async function Page() {
-  const recipes = await ServerFetch("/api/recipes");
 
-  return <ManageRecipesTable recipes={recipes} />;
+export default async function Page({
+  searchParams,
+}) {
+
+    const params = await searchParams; // Next.js 15
+  const page =
+    Number(params.page) || 1;
+
+  const data = await ServerFetch(
+    `/api/admin/recipes?page=${page}&limit=5`
+  );
+
+  return (
+    <ManageRecipesTable
+      recipes={data.recipes}
+      totalPages={data.totalPages}
+      currentPage={data.currentPage}
+    />
+  );
 }
