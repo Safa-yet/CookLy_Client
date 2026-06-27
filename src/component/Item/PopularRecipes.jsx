@@ -48,7 +48,7 @@ export default function PopularRecipes({ recipes }) {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8"
         >
-          {recipes.map((recipe) => (
+          {recipes.slice(0, 4).map((recipe) => (
             <motion.div
               key={recipe._id}
               variants={cardVariants}

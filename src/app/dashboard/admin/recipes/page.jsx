@@ -1,5 +1,5 @@
 import ManageRecipesTable from "@/component/Item/ManageRecipesTable";
-import { ServerFetch } from "@/lib/Shared/Server";
+import { ProtectServerFetch, ServerFetch } from "@/lib/Shared/Server";
 
 
 export default async function Page({
@@ -10,7 +10,7 @@ export default async function Page({
   const page =
     Number(params.page) || 1;
 
-  const data = await ServerFetch(
+  const data = await ProtectServerFetch(
     `/api/admin/recipes?page=${page}&limit=5`
   );
 

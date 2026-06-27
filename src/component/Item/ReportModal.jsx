@@ -12,6 +12,10 @@ export default function ReportModal({ recipe, user }) {
   const [reason, setReason] = useState("");
 
   const handleSubmit = async () => {
+       if (!user) {
+            router.push(`/auth/signin?redirect=/recipes/${recipe._id}`);
+            return toast.error("Please Login To Like Recipe");
+          }
     if (!reason) {
       toast.error("Select a reason");
       return;

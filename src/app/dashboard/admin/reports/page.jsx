@@ -1,9 +1,9 @@
 import ReportsTable from "@/component/Item/ReportsTable";
-import { ServerFetch } from "@/lib/Shared/Server";
+import { ProtectServerFetch, ServerFetch } from "@/lib/Shared/Server";
 
 
 export default async function Page() {
-  const reports = await ServerFetch(
+  const reports = await ProtectServerFetch(
     "/api/admin/reports"
   );
 

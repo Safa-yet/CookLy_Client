@@ -1,9 +1,10 @@
 import ManageUsersTable from "@/component/Item/ManageUsersTable";
 import { getAllUsers } from "@/lib/api/getUser";
+import { ProtectServerFetch } from "@/lib/Shared/Server";
 
 
 export default async function ManageUsersPage() {
-  const users = await getAllUsers();
+  const users = await ProtectServerFetch('/api/manage_users');
 
   const totalUsers = users.length;
 

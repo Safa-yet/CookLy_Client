@@ -1,11 +1,11 @@
 import TransactionsTable from "@/component/Item/TransactionsTable";
-import { ServerFetch } from "@/lib/Shared/Server";
+import { ProtectServerFetch } from "@/lib/Shared/Server";
 
 
 export default async function TransactionsPage() {
 
   const transactions =
-    await ServerFetch(
+    await ProtectServerFetch(
       "/api/admin/transactions"
     );
 

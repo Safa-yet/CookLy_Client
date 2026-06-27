@@ -1,10 +1,12 @@
 "use client";
 
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
 import { PiLeafBold } from "react-icons/pi";
+import Link from "next/link";
 
 export default function HeroBanner() {
   const fadeInUp = {
@@ -102,11 +104,13 @@ export default function HeroBanner() {
           <motion.div
             variants={fadeInUp}
             className="mb-12 flex flex-col sm:flex-row flex-wrap gap-4"
-          >
+          ><Link href={'/recipes'}>
+          
             <button className="group flex items-center justify-center gap-2 rounded-xl bg-brand-dark px-7 py-4 font-semibold text-white transition-all duration-300 hover:opacity-90 w-full sm:w-auto">
               Explore Recipes
               <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
             </button>
+          </Link>
 
             <button className="rounded-xl border border-brand-dark px-7 py-4 font-semibold text-brand-dark transition-all duration-300 hover:bg-brand-dark hover:text-white dark:border-zinc-700 dark:text-white w-full sm:w-auto">
               Share Recipe

@@ -72,7 +72,7 @@ export default function SideBar() {
         {/* TOP SECTION */}
         <div>
           <h1 className="text-2xl font-bold text-green-500 px-2 mb-6">
-            RecipeHub
+           {role} Dashboard
           </h1>
 
           <nav className="flex flex-col gap-2">

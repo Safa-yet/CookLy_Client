@@ -1,6 +1,6 @@
 "use server";
 
-import { ServerFetch, ServerPost } from "../Shared/Server";
+import { ProtectServerFetch, ServerFetch, ServerPost } from "../Shared/Server";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -38,7 +38,7 @@ export const deleteRecipe = async (id) => {
 // Get Favorite Recipe
 
 export const getUserFavoriteRecipe = async (userId) => {
-  return await ServerFetch(`/api/recipe/favorites?authorId=${userId}`);
+  return await ProtectServerFetch(`/api/recipe/favorites?authorId=${userId}`);
 };
 
 // Remove Facorite
