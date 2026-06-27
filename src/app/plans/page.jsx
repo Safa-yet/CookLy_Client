@@ -1,19 +1,17 @@
-
 "use client";
 
-import { Card, Button, Chip } from "@heroui/react";
-import {
-  FiCheck,
-  FiBookOpen,
-  FiUsers,
-  FiAward,
-} from "react-icons/fi";
+import { motion } from "framer-motion";
+import { AiFillCrown } from "react-icons/ai";
+import { FiArrowRight, FiAward, FiBookOpen, FiCheck, FiUsers, FiZap } from "react-icons/fi";
+
 
 const plans = [
   {
     name: "Free",
     id: "user_free",
     price: "$0",
+    period: "",
+    icon: <FiBookOpen className="text-zinc-400 text-2xl" />,
     description: "Perfect for beginners who want to start sharing recipes.",
     features: [
       "Publish up to 2 recipes",
@@ -22,12 +20,15 @@ const plans = [
       "Save favorite recipes",
       "Basic profile access",
     ],
+    popular: false,
+    btnBg: "bg-zinc-100 hover:bg-zinc-200 text-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-200",
   },
-
   {
     name: "Pro",
     id: "user_pro",
-    price: "$9.99/mo",
+    price: "$9.99",
+    period: "/mo",
+    icon: <FiZap className="text-emerald-600 dark:text-emerald-400 text-2xl" />,
     popular: true,
     description: "Best choice for active recipe creators.",
     features: [
@@ -38,12 +39,14 @@ const plans = [
       "Priority support",
       "Advanced creator tools",
     ],
+    btnBg: "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20",
   },
-
   {
     name: "Premium",
     id: "user_premium",
-    price: "$19.99/mo",
+    price: "$19.99",
+    period: "/mo",
+    icon: <AiFillCrown className="text-amber-500 text-2xl" />,
     description: "Unlimited publishing with exclusive premium benefits.",
     features: [
       "Unlimited recipe publishing",
@@ -54,203 +57,215 @@ const plans = [
       "Priority support",
       "Early access to new features",
     ],
+    popular: false,
+    btnBg: "bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 shadow-md",
   },
 ];
 
-function PlanCard({
-  name,
-  id,
-  price,
-  description,
-  features,
-  popular,
-}) {
+const benefits = [
+  {
+    icon: <FiBookOpen size={28} className="text-emerald-600 dark:text-emerald-400" />,
+    title: "Share Recipes",
+    desc: "Publish your favorite dishes and inspire food lovers worldwide seamlessly.",
+  },
+  {
+    icon: <FiUsers size={28} className="text-emerald-600 dark:text-emerald-400" />,
+    title: "Build Community",
+    desc: "Connect with passionate cooks, receive feedback, and grow your audience.",
+  },
+  {
+    icon: <FiAward size={28} className="text-emerald-600 dark:text-emerald-400" />,
+    title: "Premium Benefits",
+    desc: "Unlock ultimate unlimited publishing slots and exclusive verified profile perks.",
+  },
+];
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
+
+function PlanCard({ name, id, price, period, description, features, popular, icon, btnBg }) {
   return (
-    <Card
-      className={`relative overflow-hidden rounded-3xl border bg-white shadow-lg h-full ${
+    <motion.div
+      variants={fadeInUp}
+      className={`relative font-sans group flex flex-col h-full rounded-[36px] p-8 transition-all duration-300 ${
         popular
-          ? "border-[#00B96D] ring-2 ring-[#00B96D]"
-          : "border-gray-200"
+          ? "bg-white dark:bg-zinc-900 border-2 border-emerald-500 shadow-[0_30px_60px_rgba(4,47,30,0.08)] scale-105 z-10"
+          : "bg-white/70 dark:bg-zinc-900/50 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/80 shadow-[0_20px_40px_rgba(0,0,0,0.02)] hover:border-zinc-300 dark:hover:border-zinc-700"
       }`}
     >
       {popular && (
-        <div className="absolute top-4 right-4 bg-[#00B96D] text-white px-3 py-1 rounded-full text-xs font-medium">
+        <span className="absolute top-5 right-5 bg-emerald-500 text-white px-3.5 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase">
           Most Popular
-        </div>
+        </span>
       )}
 
-      <Card.Content className="p-8 flex flex-col h-full">
-        <h3 className="text-3xl font-bold text-[#091E21]">
+      {/* Card Header */}
+      <div className="mb-6">
+        <div className="w-12 h-12 rounded-2xl bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center border border-zinc-100 dark:border-zinc-800 mb-4 shadow-sm">
+          {icon}
+        </div>
+        <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
           {name}
         </h3>
-
-        <div className="mt-6">
-          <span className="text-5xl font-black text-[#091E21]">
-            {price}
-          </span>
-        </div>
-
-        <p className="text-gray-500 mt-4">
+        <p className="text-zinc-400 dark:text-zinc-500 text-sm mt-2 font-medium min-h-[40px]">
           {description}
         </p>
+      </div>
 
-        <div className="mt-8 space-y-4 flex-grow">
-          {features.map((feature) => (
-            <div
-              key={feature}
-              className="flex items-start gap-3"
-            >
-              <FiCheck className="text-[#00B96D] mt-1 shrink-0" />
-              <span className="text-gray-700">
-                {feature}
-              </span>
+      {/* Pricing Pricing Section */}
+      <div className="mb-6 flex items-baseline">
+        <span className="text-5xl font-black text-zinc-900 dark:text-zinc-50 tracking-tight">
+          {price}
+        </span>
+        <span className="text-zinc-400 dark:text-zinc-500 font-semibold text-sm ml-1">
+          {period}
+        </span>
+      </div>
+
+      {/* Features List */}
+      <div className="space-y-3.5 flex-grow mb-8 border-t border-dashed border-zinc-200/80 dark:border-zinc-800/80 pt-6">
+        {features.map((feature) => (
+          <div key={feature} className="flex items-start gap-3 text-sm">
+            <div className="mt-0.5 rounded-full p-0.5 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 shrink-0">
+              <FiCheck size={14} className="stroke-[3]" />
             </div>
-          ))}
-        </div>
+            <span className="text-zinc-600 dark:text-zinc-300 font-medium">
+              {feature}
+            </span>
+          </div>
+        ))}
+      </div>
 
-        <form
-          action="/api/checkout_sessions"
-          method="POST"
+      {/* Checkout Form & Button */}
+      <form action="/api/checkout_sessions" method="POST" className="w-full mt-auto">
+        <input type="hidden" name="plan_id" value={id} />
+        <button
+          type="submit"
+          className={`w-full h-12 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 active:scale-[0.98] ${btnBg}`}
         >
-          <input
-            type="hidden"
-            name="plan_id"
-            value={id} 
-          />
-    
-
-          <Button
-            type="submit"
-            className="w-full mt-8 bg-[#00B96D] text-white"
-          >
-            {id === "user_free"
-              ? "Current Plan"
-              : "Upgrade Now"}
-          </Button>
-        </form>
-      </Card.Content>
-    </Card>
+          {id === "user_free" ? "Current Plan" : "Upgrade Now"}
+        </button>
+      </form>
+    </motion.div>
   );
 }
 
 export default function PlansPage() {
   return (
-    <section className="min-h-screen bg-[#F4F6F8] py-20">
-      <div className="max-w-7xl mx-auto px-5">
+    <section className="font-sans min-h-screen bg-[#FBFBFA] dark:bg-zinc-950 py-20 px-6 relative overflow-hidden transition-colors duration-300 select-none">
+      
+      {/* Decorative Brand Light Glow Glares */}
+      <div className="absolute top-0 right-[-10%] w-[600px] h-[600px] rounded-full bg-emerald-500/5 dark:bg-emerald-500/5 blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-amber-500/5 dark:bg-amber-500/5 blur-[120px] pointer-events-none" />
 
-        {/* Hero */}
+      <div className="max-w-7xl mx-auto relative z-10">
 
-        <div className="text-center mb-20">
-          <Chip
-            className="bg-[#DFF8EC] text-[#00B96D]"
+        {/* Hero Headers */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="text-center mb-24 flex flex-col items-center"
+        >
+          <motion.span 
+            variants={fadeInUp}
+            className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100/60 dark:border-emerald-900/50 text-emerald-700 dark:text-emerald-400 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase font-sans shadow-sm"
           >
-            CookLy Membership Plans
-          </Chip>
+            Membership Plans
+          </motion.span>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-[#091E21] mt-6">
-            Unlock Your Recipe Journey
-          </h1>
+          <motion.h1 
+            variants={fadeInUp}
+            className="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-zinc-900 dark:text-zinc-50 mt-6 max-w-3xl leading-tight tracking-tight"
+          >
+            Unlock Your Culinary <br className="hidden sm:inline" />
+            <span className="text-emerald-600 dark:text-emerald-400">Publishing Power</span>
+          </motion.h1>
 
-          <p className="text-gray-500 max-w-3xl mx-auto mt-5 text-lg">
-            Share recipes, inspire food lovers,
-            and unlock premium publishing power.
-          </p>
-        </div>
+          <motion.p 
+            variants={fadeInUp}
+            className="text-zinc-400 dark:text-zinc-400 max-w-2xl mx-auto mt-4 text-base sm:text-lg font-medium"
+          >
+            Share signature recipes, inspire an active community of food lovers, and elevate your dashboard tracking systems.
+          </motion.p>
+        </motion.div>
 
-        {/* Pricing Cards */}
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Pricing Cards Layout Grid */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center lg:px-4"
+        >
           {plans.map((plan) => (
-            <PlanCard
-              key={plan.id}
-              {...plan}
-            />
+            <PlanCard key={plan.id} {...plan} />
           ))}
-        </div>
+        </motion.div>
 
-        {/* Benefits */}
+        {/* Brand Benefits Features Section */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-36 border-t border-zinc-200/60 dark:border-zinc-800/80 pt-16"
+        >
+          {benefits.map((benefit, idx) => (
+            <motion.div
+              key={idx}
+              variants={fadeInUp}
+              className="bg-white/40 dark:bg-zinc-900/20 backdrop-blur-sm border border-zinc-100 dark:border-zinc-900 rounded-[28px] p-6 shadow-sm flex gap-4 items-start"
+            >
+              <div className="p-3.5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 shadow-sm shrink-0">
+                {benefit.icon}
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+                  {benefit.title}
+                </h3>
+                <p className="text-zinc-400 dark:text-zinc-500 text-xs md:text-sm font-medium mt-1.5 leading-relaxed">
+                  {benefit.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 mt-24">
+        {/* Luxury CTA Canvas Banner */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-32 relative overflow-hidden bg-[#042F1E] dark:bg-zinc-900 rounded-[40px] p-10 md:p-14 text-center shadow-[0_30px_60px_rgba(4,47,30,0.15)] border border-emerald-950/20"
+        >
+          {/* Subtle Graphic Glow Circle inside CTA */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
 
-          <Card className="rounded-3xl shadow-md">
-            <Card.Content className="p-8">
-              <FiBookOpen
-                size={40}
-                className="text-[#00B96D]"
-              />
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-black text-white tracking-tight leading-tight max-w-3xl mx-auto">
+            Ready to Become a Top <br className="hidden sm:inline" /> Cookly Creator?
+          </h2>
 
-              <h3 className="text-2xl font-bold mt-5">
-                Share Recipes
-              </h3>
+          <p className="text-emerald-200/70 dark:text-zinc-400 mt-4 max-w-xl mx-auto text-sm sm:text-base font-medium">
+            Join thousands of food lovers already sharing and monetizing premium custom food recipes today.
+          </p>
 
-              <p className="text-gray-500 mt-3">
-                Publish your favorite dishes
-                and inspire food lovers worldwide.
-              </p>
-            </Card.Content>
-          </Card>
-
-          <Card className="rounded-3xl shadow-md">
-            <Card.Content className="p-8">
-              <FiUsers
-                size={40}
-                className="text-[#00B96D]"
-              />
-
-              <h3 className="text-2xl font-bold mt-5">
-                Build Community
-              </h3>
-
-              <p className="text-gray-500 mt-3">
-                Connect with passionate cooks
-                and grow your audience.
-              </p>
-            </Card.Content>
-          </Card>
-
-          <Card className="rounded-3xl shadow-md">
-            <Card.Content className="p-8">
-              <FiAward
-                size={40}
-                className="text-[#00B96D]"
-              />
-
-              <h3 className="text-2xl font-bold mt-5">
-                Premium Benefits
-              </h3>
-
-              <p className="text-gray-500 mt-3">
-                Unlock unlimited publishing and
-                exclusive premium perks.
-              </p>
-            </Card.Content>
-          </Card>
-
-        </div>
-
-        {/* CTA */}
-
-        <div className="mt-24">
-          <div className="bg-[#043330] rounded-[32px] p-12 text-center">
-
-            <h2 className="text-4xl font-bold text-white">
-              Ready To Become A Top Creator?
-            </h2>
-
-            <p className="text-gray-300 mt-4 max-w-2xl mx-auto">
-              Join thousands of food lovers already
-              sharing recipes on CookLy.
-            </p>
-
-            <Button className="mt-8 bg-[#00B96D] text-white">
-              Start Sharing Today
-            </Button>
-
-          </div>
-        </div>
+          <button className="group mt-8 inline-flex items-center gap-2.5 bg-emerald-500 text-white hover:bg-emerald-400 px-8 h-14 rounded-2xl font-bold text-sm tracking-wide transition-all duration-300 active:scale-[0.98] shadow-lg shadow-emerald-950/30">
+            <span>Start Sharing Today</span>
+            <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </button>
+        </motion.div>
 
       </div>
     </section>
   );
 }
-

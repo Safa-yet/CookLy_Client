@@ -8,13 +8,13 @@ import { auth } from "../auth";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 export const ServerFetch = async (path)=>{
-     const { token } = await auth.api.getToken({
-    headers: await headers(),
-  });
+  //    const { token } = await auth.api.getToken({
+  //   headers: await headers(),
+  // });
     const res =await fetch(`${baseUrl}${path}`,{
-      headers: {
-            authorization: `Bearer ${token}`,
-      },
+      // headers: {
+      //       authorization: `Bearer ${token}`,
+      // },
     },)
     const data = await res.json();
     return data

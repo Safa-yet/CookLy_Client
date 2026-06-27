@@ -4,18 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Confetti from "react-confetti";
 import Link from "next/link";
-import { FiCheckCircle } from "react-icons/fi";
+import { FiCheckCircle, FiMail, FiHash, FiDollarSign, FiArrowRight, FiBookOpen } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-export default function SuccessContent({ customerEmail,subsIndfo }) {
+export default function SuccessContent({ customerEmail, subsIndfo }) {
   const router = useRouter();
-
-  const [showMessage, setShowMessage] = useState(true);
-
-  const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0,
-  });
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const updateSize = () => {
@@ -26,197 +20,150 @@ export default function SuccessContent({ customerEmail,subsIndfo }) {
     };
 
     updateSize();
-
     window.addEventListener("resize", updateSize);
-
-    return () => {
-      window.removeEventListener("resize", updateSize);
-    };
+    return () => window.removeEventListener("resize", updateSize);
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#F4F6F8] overflow-hidden flex items-center justify-center px-5">
-      {/* Confetti */}
+    <div className="relative min-h-screen bg-[#FBFBFA] dark:bg-zinc-950 overflow-hidden flex items-center justify-center px-4 py-12 transition-colors duration-300">
+      
+      {/* Premium Confetti */}
       <Confetti
         width={windowSize.width}
         height={windowSize.height}
         recycle={false}
-        numberOfPieces={500}
+        numberOfPieces={350}
+        gravity={0.15}
+        colors={["#00B96D", "#10B981", "#34D399", "#FBBF24", "#F59E0B"]}
       />
 
-      {/* Success Popup */}
-      {/* {showMessage && (
-        // <div className="fixed inset-0 z-[9999] bg-black/40 backdrop-blur-sm flex items-center justify-center p-5">
-        //   <motion.div
-        //     initial={{
-        //       opacity: 0,
-        //       scale: 0.8,
-        //       y: 30,
-        //     }}
-        //     animate={{
-        //       opacity: 1,
-        //       scale: 1,
-        //       y: 0,
-        //     }}
-        //     transition={{
-        //       duration: 0.4,
-        //     }}
-        //     className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 text-center"
-        //   >
-        //     <div className="w-20 h-20 mx-auto rounded-full bg-[#DFF8EC] flex items-center justify-center">
-        //       <FiCheckCircle className="text-[#00B96D] text-5xl" />
-        //     </div>
+      {/* Decorative Premium Glow Backgrounds */}
+      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-emerald-500/10 dark:bg-emerald-500/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-amber-500/10 dark:bg-amber-500/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-emerald-500/5 blur-[100px] pointer-events-none" />
 
-        //     <h2 className="text-3xl font-bold text-[#091E21] mt-5">
-        //       Payment Successful 🎉
-        //     </h2>
-
-        //     <p className="text-gray-500 mt-3">
-        //       Congratulations! Your subscription has been activated
-        //       successfully.
-        //     </p>
-
-        //     <button
-        //       onClick={() => router.push("/dashborad")}
-        //       className="mt-6 w-full bg-[#00B96D] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition"
-        //     >
-        //       OK
-        //     </button>
-        //   </motion.div>
-        // </div>
-      )} */}
-
-      {/* Background Decorations */}
-      <div className="absolute top-20 left-20 w-40 h-40 bg-[#00B96D]/10 rounded-full blur-3xl" />
-
-      <div className="absolute bottom-20 right-20 w-52 h-52 bg-purple-300/20 rounded-full blur-3xl" />
-
-      <div className="absolute top-1/2 left-0 w-24 h-24 bg-[#00B96D]/20 rounded-full blur-2xl" />
-
-      {/* Main Card */}
+      {/* Main Container Container */}
       <motion.div
-        initial={{
-          opacity: 0,
-          scale: 0.7,
-          y: 50,
-        }}
-        animate={{
-          opacity: 1,
-          scale: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 0.8,
-        }}
-        className="relative z-10"
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.7, type: "spring", stiffness: 80 }}
+        className="w-full max-w-xl relative z-10"
       >
-        <div className="bg-white/90 backdrop-blur-xl rounded-[32px] shadow-2xl border border-white p-4 md:p-7 text-center">
+        {/* Main Card */}
+        <div className="bg-white/80 dark:bg-zinc-900/70 backdrop-blur-xl rounded-[40px] shadow-[0_30px_70px_rgba(4,47,30,0.06)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.4)] border border-zinc-100 dark:border-zinc-800/60 p-8 md:p-10 text-center transition-all duration-300">
+          
+          {/* Animated Animated Success Icon */}
           <motion.div
-            initial={{
-              scale: 0,
-              rotate: -180,
-            }}
-            animate={{
-              scale: 1,
-              rotate: 0,
-            }}
-            transition={{
-              delay: 0.3,
-              type: "spring",
-              stiffness: 150,
-            }}
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 120, damping: 12 }}
             className="flex justify-center"
           >
-            <div className="w-28 h-28 rounded-full bg-[#DFF8EC] flex items-center justify-center">
-              <FiCheckCircle className="text-[#00B96D] text-6xl" />
+            <div className="w-24 h-24 rounded-[32px] bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-inner shadow-emerald-100/50 dark:shadow-none">
+              <FiCheckCircle className="text-5xl" />
             </div>
           </motion.div>
 
+          {/* Header Typography */}
           <motion.h1
-            initial={{
-              opacity: 0,
-              y: 20,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: 0.5,
-            }}
-            className="text-3xl font-bold text-[#091E21] mt-8"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="text-3xl md:text-4xl font-serif font-black tracking-tight text-zinc-900 dark:text-zinc-50 mt-6"
           >
-            Congratulations 🎉
+            Payment Successful!
           </motion.h1>
 
           <motion.p
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              delay: 0.7,
-            }}
-            className="text-gray-500 mt-5 text-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium text-sm font-sans"
           >
-            Your payment has been completed successfully.
+            Woohoo! Your premium culinary experience has been activated.
           </motion.p>
 
+          {/* Professional Receipt/Invoice Layout */}
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 15,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: 0.9,
-            }}
-            className="mt-8 bg-[#F4F6F8] rounded-2xl p-5"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mt-8 bg-brand-cream/30 dark:bg-zinc-950/40 border border-zinc-100 dark:border-zinc-800/50 rounded-3xl p-6 text-left space-y-4"
           >
-            <p className="text-gray-600">
-              Confirmation email sent to
-            </p>
+            <div className="border-b border-dashed border-zinc-200 dark:border-zinc-800 pb-3 flex justify-between items-center">
+              <span className="text-xs uppercase tracking-widest font-bold text-zinc-400 dark:text-zinc-500 font-sans">
+                Order Receipt
+              </span>
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            </div>
 
-            <h3 className="text-[#091E21] font-bold text-xl mt-2">
-              {customerEmail}
-            </h3>
-            <h1>Transaction ID:{subsIndfo.transactionId}</h1>
-            <h1>Amount: ${subsIndfo.recipePrice}</h1>
+            {/* Email Field */}
+            <div className="flex items-start gap-3">
+              <div className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-zinc-400 dark:text-zinc-500">
+                <FiMail size={16} />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Account Email</p>
+                <p className="text-zinc-800 dark:text-zinc-200 font-semibold text-sm mt-0.5 break-all">{customerEmail}</p>
+              </div>
+            </div>
+
+            {/* Transaction ID Field */}
+            <div className="flex items-start gap-3">
+              <div className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-zinc-400 dark:text-zinc-500">
+                <FiHash size={16} />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Transaction ID</p>
+                <p className="text-zinc-800 dark:text-zinc-200 font-mono font-bold text-sm mt-0.5 select-all tracking-tight">
+                  {subsIndfo?.transactionId || "N/A"}
+                </p>
+              </div>
+            </div>
+
+            {/* Total Paid Amount Field */}
+            <div className="flex items-start gap-3 bg-white/60 dark:bg-zinc-900/40 border border-zinc-100 dark:border-zinc-800/80 rounded-2xl p-3.5">
+              <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400">
+                <FiDollarSign size={16} />
+              </div>
+              <div className="flex justify-between items-center w-full">
+                <div>
+                  <p className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Amount Paid</p>
+                  <p className="text-zinc-500 dark:text-zinc-500 text-xs mt-0.5 font-medium">Cookly Premium Recipe Access</p>
+                </div>
+                <div className="text-right">
+                  <span className="text-2xl font-serif font-black text-emerald-800 dark:text-emerald-400">
+                    ${subsIndfo?.recipePrice}
+                  </span>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
+          {/* Action Navigation Buttons */}
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 20,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: 1.1,
-            }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mt-10"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
           >
             <Link
               href="/dashboard/user"
-              className="bg-[#00B96D] text-white px-8 py-3 rounded-xl font-medium hover:opacity-90 transition"
+              className="group flex items-center justify-center gap-2 bg-emerald-800 dark:bg-emerald-700 text-white px-8 h-12 rounded-2xl font-bold text-sm shadow-md shadow-emerald-900/10 hover:opacity-95 transition-all duration-300 active:scale-[0.98]"
             >
-              Go To Dashboard
+              <span>Go To Dashboard</span>
+              <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
 
             <Link
               href="/recipes"
-              className="border border-gray-200 px-8 py-3 rounded-xl font-medium hover:bg-gray-50 transition"
+              className="flex items-center justify-center gap-2 border-2 border-zinc-100 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 px-8 h-12 rounded-2xl font-bold text-sm bg-zinc-50/50 dark:bg-zinc-950/20 hover:bg-white dark:hover:bg-zinc-900 transition-all duration-300 active:scale-[0.98]"
             >
-              Browse Recipes
+              <FiBookOpen size={16} />
+              <span>Browse Recipes</span>
             </Link>
           </motion.div>
+
         </div>
       </motion.div>
     </div>

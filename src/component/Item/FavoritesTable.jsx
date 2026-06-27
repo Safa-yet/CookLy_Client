@@ -14,7 +14,7 @@ import FavoriteRemoveModal from "./FavoriteRemoveModal";
 export default function FavoritesTable({ favorites }) {
   if (!favorites?.length) {
     return (
-      <div className="bg-white rounded-3xl p-16 text-center border">
+      <div className="bg-background text-foreground rounded-3xl p-16 text-center border">
         <div className="w-24 h-24 bg-red-50 rounded-full mx-auto flex items-center justify-center">
           <FiHeart className="text-4xl text-red-500" />
         </div>
@@ -35,7 +35,7 @@ export default function FavoritesTable({ favorites }) {
   }
 
   return (
-    <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+    <div className="bg-background text-foreground rounded-3xl shadow-sm p-6">
       {/* Header */}
 
       <div className="flex justify-between items-center mb-8">

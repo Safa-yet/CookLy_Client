@@ -38,6 +38,6 @@ export default async function Success({ searchParams }) {
     const result = await createSubsction(subsIndfo)
 
     // console.log('subscription', result);
-    return <SuccessContent customerEmail={customerEmail} />;
+    return <SuccessContent customerEmail={customerEmail}  subsIndfo={subsIndfo}/>;
   }
 }
