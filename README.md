@@ -1,36 +1,320 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍽️ RecipeBook – Premium Recipe Sharing Platform
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+# 🍽️ RecipeBook
+
+### A Modern Premium Recipe Sharing & Discovery Platform
+
+Share your favorite recipes, discover delicious meals, save favorites, purchase premium recipe guides, and connect with food lovers around the world.
+
+---
+
+![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38BDF8?logo=tailwindcss)
+![MongoDB](https://img.shields.io/badge/MongoDB-Green?logo=mongodb)
+![HeroUI](https://img.shields.io/badge/HeroUI-Latest-purple)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+</div>
+
+---
+
+# 📖 Overview
+
+RecipeBook is a modern full-stack recipe sharing platform where users can create, explore, like, favorite, and purchase premium recipe guides.
+
+The application is designed with a clean user experience, premium UI, responsive layouts, authentication, subscription plans, and role-based access.
+
+---
+
+# ✨ Key Features
+
+## 👤 Authentication
+
+* Secure Login & Registration
+* Protected Routes
+* Session-based Authentication
+* Redirect After Login
+* User Profile Management
+
+---
+
+## 🍲 Recipe Management
+
+* Add New Recipe
+* Edit Own Recipes
+* Delete Recipes
+* View Recipe Details
+* Rich Recipe Information
+* Premium Responsive Cards
+* Featured Recipes
+* Recipe Status Management
+
+---
+
+## 🔍 Smart Search & Filtering
+
+* Live Recipe Search
+* Search by Recipe Name
+* Category Filtering
+* MongoDB `$in` Category Filter
+* Dynamic Data Fetching
+* Instant UI Update
+
+---
+
+## ❤️ User Interaction
+
+* Like Recipes
+* Add to Favorites
+* Report Recipes
+* Purchase Premium Recipe Guides
+* Responsive Interactive UI
+
+---
+
+## 💳 Premium Membership System
+
+Three Subscription Plans:
+
+* Free
+* Pro
+* Premium
+
+Features:
+
+* Recipe Publishing Limit
+* Unlimited Recipes (Premium)
+* Publishing Progress
+* Remaining Recipe Counter
+* Upgrade Membership
+
+---
+
+## 📊 Dashboard
+
+Users can
+
+* View Published Recipes
+* Track Recipe Usage
+* Edit Recipes
+* Manage Favorites
+* View Subscription Status
+
+---
+
+## 🛡️ Admin Features
+
+* Admin Dashboard
+* View All Recipes
+* Moderate Content
+* Review Reports
+* Manage Users
+* Manage Published Recipes
+
+---
+
+## 🎨 Beautiful User Experience
+
+* Premium Glassmorphism Design
+* Responsive Layout
+* Mobile Friendly
+* Tablet Friendly
+* Desktop Optimized
+* Dark Mode
+* Light Mode
+* Smooth Animations
+* Framer Motion Effects
+* Loading States
+* Error Handling
+* Custom 404 Page
+
+---
+
+# 🚀 Tech Stack
+
+### Frontend
+
+* Next.js 15 (App Router)
+* React 19
+* Tailwind CSS 4
+* HeroUI
+* Framer Motion
+* React Icons
+* Lottie React
+
+### Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* JWT Authentication
+
+### Deployment
+
+* Vercel
+* Render
+
+---
+
+# 📁 Main Features
+
+```
+✔ Authentication
+✔ Authorization
+✔ Protected Routes
+✔ Add Recipe
+✔ Edit Recipe
+✔ Delete Recipe
+✔ Browse Recipes
+✔ Search Recipes
+✔ Category Filter
+✔ Like System
+✔ Favorite System
+✔ Purchase Recipe Guide
+✔ Membership Plans
+✔ Usage Tracking
+✔ Dashboard
+✔ Admin Panel
+✔ Report System
+✔ Responsive Design
+✔ Dark Mode
+✔ Loading UI
+✔ Error Boundary
+✔ Custom 404 Page
+```
+
+---
+
+# 📱 Fully Responsive
+
+Works perfectly on
+
+* 📱 Mobile
+* 📲 Tablet
+* 💻 Laptop
+* 🖥 Desktop
+
+---
+
+# 🌙 Theme Support
+
+* Light Theme
+* Dark Theme
+* Theme Persistence
+
+---
+
+# 📷 Screenshots
+
+Add screenshots here.
+
+```
+Home Page
+
+Browse Recipes
+
+Recipe Details
+
+Dashboard
+
+Membership
+
+Admin Panel
+```
+
+---
+
+# ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/your-username/recipebook.git
+```
+
+Go to project
+
+```bash
+cd recipebook
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Create `.env.local`
+
+```env
+NEXT_PUBLIC_API_URL=
+MONGODB_URI=
+JWT_SECRET=
+STRIPE_SECRET_KEY=
+```
+
+Run the project
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# 📂 Folder Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+components/
+lib/
+hooks/
+providers/
+public/
+middleware.js
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+# 🎯 Future Improvements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* AI Recipe Generator
+* AI Nutrition Analysis
+* Recipe Reviews
+* Recipe Comments
+* Recipe Ratings
+* Meal Planner
+* Shopping List
+* Notification System
+* Email Verification
+* Social Login
+* Recipe Videos
+* Recipe Collections
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# 👨‍💻 Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Md. Safayet**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Full Stack Developer
+
+---
+
+# ⭐ Support
+
+If you like this project, don't forget to
+
+⭐ Star the repository
+
+🍴 Fork it
+
+💙 Share it with others
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
